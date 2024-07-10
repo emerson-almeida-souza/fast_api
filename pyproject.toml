@@ -34,7 +34,7 @@ addopts = '-p no:warnings'
 
 [tool.taskipy.tasks]
 run = 'fastapi dev fast_api/app.py'
-run_local = 'fastapi dev fast_api/app.py --host 0.0.0.0'
+run_local = 'fastapi dev fast_api/app.py --host 0.0.0.0 --port 8001'
 
 pre_test = 'task lint'
 test = 'pytest --cov=fast_api -vv'
