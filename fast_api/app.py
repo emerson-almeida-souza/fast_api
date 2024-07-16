@@ -2,7 +2,7 @@ from http import HTTPStatus
 from fastapi import FastAPI
 from fastapi.responses import HTMLResponse
 
-from fast_api.shemas import Message
+from fast_api.shemas import Message, UserSchema
 
 app = FastAPI()
 
@@ -30,3 +30,7 @@ def read_root():
 @app.post('/')
 def read_root():
     return {'message': 'POST Olá Mundo!'}
+
+@app.post('/users/')
+def create_user(user: UserSchema, response_model=UserSchema):
+    return user
