@@ -7,3 +7,11 @@ class UserSchema(BaseModel):
     usarname: str
     email: EmailStr
     password: str
+
+class UserDB(UserSchema):
+    id: int
+
+class UserPublic(BaseModel):
+    id: int
+    usarname: str
+    email: EmailStr

@@ -2,9 +2,11 @@ from http import HTTPStatus
 from fastapi import FastAPI
 from fastapi.responses import HTMLResponse
 
-from fast_api.shemas import Message, UserSchema
+from fast_api.shemas import Message, UserSchema, UserPublic, UserDB
 
 app = FastAPI()
+
+fake_data_base = []
 
 @app.get('/', status_code=HTTPStatus.OK, response_model=Message) 
 def read_root():
@@ -31,6 +33,10 @@ def read_root():
 def read_root():
     return {'message': 'POST Olá Mundo!'}
 
-@app.post('/users/')
-def create_user(user: UserSchema, response_model=UserSchema):
-    return user
+@app.post('/users/', status_code=HTTPStatus.CREATED, response_model=UserPublic)
+def create_user(user: UserSchema):
+    user_with_id = UserDB(
+        id=len(fake_data_base) + 1,
+        **user.model_dump()
+        )
+    return user_with_id
